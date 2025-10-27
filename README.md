@@ -9,12 +9,14 @@ Kubernetes deployment of the hello-app application with Helm chart packaging.
 
 ## Repository Structure
 ```
+.
 ├── hello-app.yaml      # Kubernetes manifest
 └── hello-app/          # Helm chart directory
     ├── Chart.yaml
     ├── values.yaml
     └── templates/
-        └── deployment.yaml
+        ├── deployment.yaml
+        └── service.yaml
 ```
 
 ## Deployment
@@ -27,6 +29,11 @@ kubectl apply -f hello-app.yaml
 **Option 2: Helm chart**
 ```bash
 helm install hello-app ./hello-app
+```
+
+Note: You will need to set up a port forward for either option to make the app publicly accessible
+```bash
+kubectl port-forward service/hello-app 8080:8080 --address 0.0.0.0
 ```
 
 ## Test
